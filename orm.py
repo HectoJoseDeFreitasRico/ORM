@@ -43,17 +43,20 @@ lienzo = tk.Canvas(raiz,width=1024,height=1024)
 lienzo.pack()
 
 #Cargar personas desde le disco duro
-carga = open("jugadores.json",'r')
-cargado = carga.read()
-cargadolista = json.loads(cargado)
-for elemento in cargadolista:
-    persona = Persona()
-    persona.__dict__.update(elemento)
-    personas.append(persona)
+try:
+    carga = open("jugadores.json",'r')
+    cargado = carga.read()
+    cargadolista = json.loads(cargado)
+    for elemento in cargadolista:
+        persona = Persona()
+        persona.__dict__.update(elemento)
+        personas.append(persona)
+except:
+    print("Error")
 
 #En la coleccion introduzco instancias de personas
 if len(personas) == 0:
-    numeropersonas = len(personas)
+    numeropersonas = 10
     for i in range(0,numeropersonas):
         personas.append(Persona())
     
