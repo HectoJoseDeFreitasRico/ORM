@@ -1,6 +1,7 @@
 import tkinter as tk
 import random
 import math
+import json
 
 personas = []
 numeropersonas = 20
@@ -22,24 +23,39 @@ class Persona:
     def colisiona(self):
         if self.posx < 0 or self.posx > 1024 or self.posy < 0 or self.posy > 1024:
             self.direccion += math.pi
-         
+
+def guardarPersonas():
+     print("Guardo a los jugadores")
+     cadena = json.dumps([vars(persona) for persona in personas])
+     print(cadena)
+     
 #Creo una ventana
 raiz = tk.Tk()
+
+#Boton de guardar
+boton = tk.Button(raiz,text="Guarda",command=guardarPersonas)
+boton.pack()
+
 #En la ventana creo un lienzo
-lienzo = tk.Canvas(width=1024,height=1024)
+lienzo = tk.Canvas(raiz,width=1024,height=1024)
 lienzo.pack()
+
+
 #En la coleccion introduzco instancias de personas
 for i in range(0,numeropersonas):
     personas.append(Persona())
+    
 #Para cada una de las personas en la coleccion las pinto 
 for persona in personas:
     persona.dibuja()
+    
 #Creo un bucle repetitivo
 def bucle():
     #Para cada persona en la coleccion
     for persona in personas:
         persona.mueve()
     raiz.after(10,bucle)
+    
 #Ejecuto el bucle
 bucle()
 raiz.mainloop()
