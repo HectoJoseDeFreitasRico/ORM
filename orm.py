@@ -8,8 +8,13 @@ class Persona:
         self.posx = random.randint(0,1024)
         self.posy = random.randint(0,1024)
         self.radio = 30
+        self.direccion = 0
+        self.color = "blue"
+        self.entidad = ""
     def dibuja(self):
-        lienzo.create_oval(self.posx-self.radio/2,self.posy-self.radio/2,self.posx+self.radio/2,self.posy+self.radio/2,fill="red")
+        self.entidad = lienzo.create_oval(self.posx-self.radio/2,self.posy-self.radio/2,self.posx+self.radio/2,self.posy+self.radio/2,fill=self.color)
+    def mueve(self):
+        lienzo.move(self.entidad,500,0)
 
 raiz = tk.Tk()
 
@@ -23,5 +28,8 @@ print(personas)
 
 for persona in personas:
     persona.dibuja()
+    
+for persona in personas:
+    persona.mueve()
 
 raiz.mainloop()
