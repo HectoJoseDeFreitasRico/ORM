@@ -14,22 +14,24 @@ class Persona:
     def dibuja(self):
         self.entidad = lienzo.create_oval(self.posx-self.radio/2,self.posy-self.radio/2,self.posx+self.radio/2,self.posy+self.radio/2,fill=self.color)
     def mueve(self):
-        lienzo.move(self.entidad,500,0)
-
+        lienzo.move(self.entidad,5,0)
+#Creo una ventana
 raiz = tk.Tk()
-
+#En la ventana creo un lienzo
 lienzo = tk.Canvas(width=1024,height=1024)
 lienzo.pack()
-
+#En la coleccion introduzco instancias de personas
 for i in range(0,numeropersonas):
     personas.append(Persona())
-    
-print(personas)
-
+#Para cada una de las personas en la coleccion las pinto 
 for persona in personas:
     persona.dibuja()
-    
-for persona in personas:
-    persona.mueve()
-
+#Creo un bucle repetitivo
+def bucle():
+    #Para cada persona en la coleccion
+    for persona in personas:
+        persona.mueve()
+    raiz.after(1000,bucle)
+#Ejecuto el bucle
+bucle()
 raiz.mainloop()
