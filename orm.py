@@ -56,7 +56,7 @@ except:
 
 #En la coleccion introduzco instancias de personas
 if len(personas) == 0:
-    numeropersonas = 10
+    numeropersonas = 1
     for i in range(0,numeropersonas):
         personas.append(Persona())
     
